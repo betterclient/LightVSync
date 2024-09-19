@@ -4,7 +4,9 @@
   "version": "${version}",
   "name": "LightVSync",
   "description": "VSync without the input lag.",
-  "authors": [],
+  "authors": [
+    "betterclient"
+  ],
   "contact": {},
   "license": "MIT",
   "environment": "client",
