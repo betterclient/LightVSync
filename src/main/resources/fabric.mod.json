@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "lightvsync",
+  "version": "${version}",
+  "name": "LightVSync",
+  "description": "VSync without the input lag.",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "main": [
+      "io.github.betterclient.lightvsync.LightVSync"
+    ]
+  },
+  "mixins": [
+    "lightvsync.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": "1.21.1"
+  }
+}

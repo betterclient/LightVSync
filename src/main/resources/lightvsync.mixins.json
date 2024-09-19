@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "io.github.betterclient.lightvsync.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "MixinGameRenderer",
+    "MixinMinecraftClient"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
