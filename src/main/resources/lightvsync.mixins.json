@@ -5,9 +5,11 @@
   "compatibilityLevel": "JAVA_21",
   "client": [
     "MixinGameRenderer",
+    "MixinGameRendererBefore121",
     "MixinMinecraftClient"
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "plugin": "io.github.betterclient.lightvsync.MixinPlugin"
 }
