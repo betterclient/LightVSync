@@ -5,6 +5,7 @@ import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -20,7 +21,7 @@ public class MixinPlugin implements IMixinConfigPlugin {
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         if (mixinClassName.contains("GameRenderer")) {
-            String c = FabricLoader.getInstance().getModContainer("minecraft").orElseThrow().getMetadata().getVersion().getFriendlyString().substring(2, 4);
+            String c = FabricLoader.getInstance().getModContainer("minecraft").orElseThrow(NullPointerException::new).getMetadata().getVersion().getFriendlyString().substring(2, 4);
             int fp = Integer.parseInt(c); //1.${fp}
             if (fp >= 14 && fp <= 20) {
                 return mixinClassName.contains("121");
@@ -36,7 +37,7 @@ public class MixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public List<String> getMixins() {
-        return List.of();
+        return new ArrayList<>();
     }
 
     @Override
