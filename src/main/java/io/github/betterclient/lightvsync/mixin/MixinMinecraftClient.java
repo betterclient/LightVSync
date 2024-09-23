@@ -6,6 +6,7 @@ import org.lwjgl.PointerBuffer;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -18,8 +19,15 @@ public class MixinMinecraftClient {
     @Unique
     public boolean lv_first = true;
 
+    @Inject(method = "render", at = @At("HEAD"), cancellable = true)
+    public void onRender(boolean tick, CallbackInfo ci) {
+        if(LightVSync.run((MinecraftClient) (Object)this)) {
+            ci.cancel();
+        }
+    }
+
     @Inject(method = "render", at = @At("RETURN"))
-    public void onRenderStartThird(boolean tick, CallbackInfo ci) {
+    public void onFirstRender(boolean tick, CallbackInfo ci) {
         if(!lv_first)
             return;
 

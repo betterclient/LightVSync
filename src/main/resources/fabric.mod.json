@@ -20,7 +20,7 @@
     "lightvsync.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=${loader_version}",
+    "fabricloader": "*",
     "minecraft": "*"
   }
 }

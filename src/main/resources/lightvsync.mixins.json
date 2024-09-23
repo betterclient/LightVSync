@@ -1,15 +1,8 @@
 {
   "required": true,
-  "minVersion": "0.8",
   "package": "io.github.betterclient.lightvsync.mixin",
-  "compatibilityLevel": "JAVA_21",
+  "compatibilityLevel": "JAVA_8",
   "client": [
-    "MixinGameRenderer",
-    "MixinGameRendererBefore121",
     "MixinMinecraftClient"
-  ],
-  "injectors": {
-    "defaultRequire": 1
-  },
-  "plugin": "io.github.betterclient.lightvsync.MixinPlugin"
+  ]
 }
