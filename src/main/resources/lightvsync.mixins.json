@@ -3,6 +3,9 @@
   "package": "io.github.betterclient.lightvsync.mixin",
   "compatibilityLevel": "JAVA_8",
   "client": [
-    "MixinMinecraftClient"
-  ]
+    "MixinDebugHud",
+    "MixinMinecraftClient",
+    "MixinWindow"
+  ],
+  "plugin": "io.github.betterclient.lightvsync.MixinPlugin"
 }

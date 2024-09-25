@@ -1,5 +1,6 @@
 package io.github.betterclient.lightvsync.mixin;
 
+import io.github.betterclient.lightvsync.CancelledSwapFPSReducer;
 import io.github.betterclient.lightvsync.LightVSync;
 import net.minecraft.client.MinecraftClient;
 import org.lwjgl.PointerBuffer;
@@ -15,16 +16,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Objects;
 
 @Mixin(MinecraftClient.class)
-public class MixinMinecraftClient {
+public class MixinMinecraftClient implements CancelledSwapFPSReducer {
+    @Shadow private int fpsCounter;
     @Unique
     public boolean lv_first = true;
-
-    @Inject(method = "render", at = @At("HEAD"), cancellable = true)
-    public void onRender(boolean tick, CallbackInfo ci) {
-        if(LightVSync.run((MinecraftClient) (Object)this)) {
-            ci.cancel();
-        }
-    }
 
     @Inject(method = "render", at = @At("RETURN"))
     public void onFirstRender(boolean tick, CallbackInfo ci) {
@@ -43,5 +38,16 @@ public class MixinMinecraftClient {
 
         LightVSync.LOGGER.info("Set LightVSync fps to {}", LightVSync.fps);
         lv_first = false;
+    }
+
+    @Override
+    public void lightVSync$reduce() {
+        this.fpsCounter--;
+    }
+
+    @Inject(method = "render", at = @At(value = "INVOKE", target = "Ljava/lang/String;format(Ljava/util/Locale;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;"))
+    public void onCurrentFps(boolean tick, CallbackInfo ci) {
+        LightVSync.cancelledSwapFPS = LightVSync.cancelledSwapCounter;
+        LightVSync.cancelledSwapCounter = 0;
     }
 }
